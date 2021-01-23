@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<?import view.MapPainter?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" scaleShape="false" style=" -fx-background-image: url('Images/background.jpg');   -fx-background-size: 100% 100%;" styleClass="bodybg"
+            xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainWindowController">
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER_RIGHT" prefHeight="400.0" prefWidth="511.0">
+               <children>
+                  <Group translateX="60.0" translateY="60.0" HBox.hgrow="NEVER">
+                     <children>
+                        <Circle fill="#282828" onMouseDragged="#joystickMovement" onMousePressed="#joystickClick" onMouseReleased="#joystickToCenter" radius="38.0" stroke="BLACK">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <effect>
+                              <InnerShadow choke="0.5" color="#000000cd" height="40.0" radius="19.5" width="40.0" />
+                           </effect>
+                        </Circle>
+                        <Circle fx:id="outerCircle" fill="WHITE" radius="87.0" strokeType="OUTSIDE" strokeWidth="5.0">
+                           <stroke>
+                              <LinearGradient cycleMethod="REFLECT" endX="1.0" endY="1.0">
+                                 <stops>
+                                    <Stop color="#e8e8e8" />
+                                    <Stop color="#3c3c3c" offset="1.0" />
+                                 </stops>
+                              </LinearGradient>
+                           </stroke></Circle>
+                        <Circle fx:id="innerCircle" onMouseDragged="#joystickMovement" onMousePressed="#joystickClick" onMouseReleased="#joystickToCenter" radius="52.0" stroke="#1c1c1c" strokeLineJoin="ROUND" strokeMiterLimit="4.0" strokeWidth="0.0">
+                           <cursor>
+                              <Cursor fx:constant="OPEN_HAND" />
+                           </cursor>
+                           <effect>
+                              <DropShadow height="12.1" radius="3.325" width="3.2" />
+                           </effect>
+                           <fill>
+                              <RadialGradient centerX="0.35" centerY="0.35238095238095235" cycleMethod="REFLECT" focusDistance="-0.3023255813953488" radius="0.5930232558139534">
+                                 <stops>
+                                    <Stop color="#abd7eb" />
+                                    <Stop color="#0b80b3" offset="1.0" />
+                                 </stops>
+                              </RadialGradient>
+                           </fill>
+                        </Circle>
+                        <Slider fx:id="rudderSlider" layoutX="-70.0" layoutY="106.0" showTickMarks="true">
+                           <cursor>
+                              <Cursor fx:constant="OPEN_HAND" />
+                           </cursor>
+                        </Slider>
+                        <Slider fx:id="throttleSlider" layoutX="-124.0" layoutY="-69.0" orientation="VERTICAL" showTickMarks="true">
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                           <cursor>
+                              <Cursor fx:constant="OPEN_HAND" />
+                           </cursor>
+                        </Slider>
+                        <Label layoutX="-164.0" layoutY="-11.0" rotate="-90.0" text="throttle" textFill="#bbbbbb">
+                           <font>
+                              <Font name="Calibri" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="-30.0" layoutY="118.0" text="rudder" textFill="#bbbbbb">
+                           <font>
+                              <Font name="Calibri" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="-35.0" layoutY="-118.0" prefHeight="23.0" prefWidth="70.0" text="aileron" textFill="#bbbbbb">
+                           <font>
+                              <Font name="Calibri" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="66.0" layoutY="-11.0" rotate="90.0" text="elevator" textFill="#bbbbbb">
+                           <font>
+                              <Font name="Calibri" size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="55.0" right="100.0" top="-30.0" />
+                     </HBox.margin>
+                  </Group>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+   <top>
+      <VBox prefHeight="55.0" prefWidth="100.0"  BorderPane.alignment="CENTER">
+         <children>
+            <HBox maxHeight="54.0" prefHeight="30.0" prefWidth="505.0" spacing="12.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#connectClicked" prefHeight="39.0" prefWidth="125.0" text="Connect">
+                     <HBox.margin>
+                        <Insets left="-5.0" />
+                     </HBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <font>
+                        <Font name="Britannic Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#loadDataClicked" prefHeight="25.0" prefWidth="125.0" text="Load data">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <font>
+                        <Font name="Britannic Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#calculatePathClicked" prefHeight="37.0" prefWidth="125.0" text="Calculate path ">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <font>
+                        <Font name="Britannic Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <RadioButton fx:id="autoPilot" mnemonicParsing="false" onAction="#radioButtonClicked" prefHeight="22.0" prefWidth="181.0" text="Autopilot" textFill="WHITE">
+                     <font>
+                        <Font name="Britannic Bold" size="16.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets bottom="10.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets left="85.0" />
+                     </padding>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </RadioButton>
+                  <RadioButton fx:id="manual" blendMode="SRC_ATOP" mnemonicParsing="false" onAction="#radioButtonClicked" text="Manual" textFill="WHITE">
+                     <font>
+                        <Font name="Britannic Bold" size="17.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="25.0" />
+                     </HBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </RadioButton>
+               </children>
+               <VBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets left="-3.0" />
+               </padding>
+            </HBox>
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </VBox>
+   </top>
+   <bottom />
+   <bottom>
+      <Group>
+         <children>
+            <TextArea fx:id="textArea" focusTraversable="false" layoutY="23.0" prefHeight="276.0" prefWidth="504.0" style="-fx-border-color: #838080;" BorderPane.alignment="CENTER">
+               <effect>
+                  <InnerShadow choke="0.16" color="#00000078" height="60.3" offsetX="6.0" offsetY="5.0" radius="30.205" width="62.52" />
+               </effect>
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+            </TextArea>
+            <TextArea fx:id="systemLog" editable="false" focusTraversable="false" layoutX="517.0" layoutY="24.0" prefHeight="275.0" prefWidth="280.0" wrapText="true">
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+               <effect>
+                  <InnerShadow blurType="TWO_PASS_BOX" choke="0.16" color="#00000078" height="60.3" offsetX="6.0" offsetY="5.0" radius="30.205" width="62.52" />
+               </effect>
+            </TextArea>
+            <Text fill="WHITE" layoutX="3.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Auto Pilot Script">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="517.0" layoutY="16.0" strokeType="OUTSIDE" strokeWidth="0.0" text="System Logs">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+         </children>
+      </Group>
+   </bottom>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+   <left>
+      <MapPainter fx:id="mapPainter" airplaneImage="./resources/images/Airplane.png" destinationImage="./resources/images/Destination.png" height="400.0" onMouseClicked="#mapClicked" pathImage="./resources/images/Path.png" width="400.0" BorderPane.alignment="CENTER">
+      </MapPainter>
+   </left>
+</BorderPane>
